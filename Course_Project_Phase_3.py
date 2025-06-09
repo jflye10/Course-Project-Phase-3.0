@@ -72,5 +72,26 @@ def display_report(report_date):
             net_pay = gross_pay - income_tax
 
             if report_date.lower() == "all" or report_date == from_date:
-                print(f"From: {from_date}, To: {to_date}, name: {name}, "
-                      f"Hours:
+                print(f"From: {from_date}, To: {to_date}, Name: {name}, "
+                      f"Hours: {hours:.2f}, Rate: ${rate:.2f}, Gross: ${gross_pay:.2f}, "
+                      f"Tax Rate: {tax_rate:.2%}, Tax: ${income_tax:.2f}, Net: ${net_pay:.2f}")
+
+                totals["employees"] += 1
+                totals["hours"] += hours
+                totals["tax"] += income_tax
+                totals["net_pay"] += net_pay
+    
+    print("\n--- Totals ---")
+    print(f"Total Employees: {totals['employees']}")
+    print(f"Total Hours: {totals['hours']:.2f}")
+    print(f"Total Taxes: ${totals['tax']:.2f}")
+    print(f"Total Net Pay: ${totals['net_pay']:.2f}")
+
+def main():
+    print("Employee Payroll System")
+    prompt_employee_data()
+    report_date = get_report_date()
+    display_report(report_date)
+
+if __name__ == "__main__":
+    main()
